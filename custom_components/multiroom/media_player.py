@@ -157,10 +157,8 @@ class RoomPlayer(MediaPlayerEntity):
 
     @property
     def source_entity(self):
-        logger.debug("getting source for %s", self.device_info["name"])
         for player in self.video_players + self.audio_players:
             if source := self.hass.data[DOMAIN].source(player):
-                logger.debug("%s has source %s", player, source)
                 return source
 
     @property
@@ -179,7 +177,6 @@ class RoomPlayer(MediaPlayerEntity):
         states = [state for state in states if state]
         self.source_map = {state.attributes.get("friendly_name"): state.entity_id for state in states}
         rtn = list(self.source_map.keys())
-        logger.debug("got source list %s for %s", rtn, self.device_info["name"])
         return rtn
 
     @property
@@ -231,7 +228,6 @@ class RoomPlayer(MediaPlayerEntity):
         await self.async_turn_on()
         for player in self.players:
             source_selections = self.hass.data[DOMAIN].source_selections(self.source_map[source], player)
-            logger.debug("source selections for %s are %s", player, source_selections)
             for selector, selection in source_selections.items():
                 await self.hass.services.async_call(
                     MEDIA_PLAYER_DOMAIN,
