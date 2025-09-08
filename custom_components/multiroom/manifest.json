@@ -6,7 +6,7 @@
   "dependencies": [],
   "documentation": "https://github.com/slaclau/ha-multiroom",
   "homekit": {},
-  "requirements": [],
+  "requirements": ["networkx==3.5"],
   "ssdp": [],
   "zeroconf": [],
   "version": 1
