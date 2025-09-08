@@ -47,7 +47,9 @@ class MultiroomGraph:
 
     def source_selections(self, source, sink):
         paths = list(nx.all_simple_paths(self.graph, source, sink))
+        logger.debug("find source selections for %s (%s)", source, sink)
         logger.debug(paths)
+        nx.write_network_text(self.graph)
         assert(len(paths)) == 1
         path = paths[0]
         selections = {}
