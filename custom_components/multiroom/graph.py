@@ -37,7 +37,6 @@ class MultiroomGraph:
             )
     
     def sources(self, sink=None):
-        logger.debug("getting sources for %s", sink)
         if sink is None:
             return [node for node in self.graph.nodes() if not self.graph.in_degree(node)]
         if sink not in self.graph:
@@ -65,9 +64,7 @@ class MultiroomGraph:
         return rtn
 
     def source(self, player):
-        logger.debug("finding source for %s", player)
         while True:
-            logger.debug("checking selection for %s", player)
             in_edges = self.graph.in_edges(player, data=True)
             if not in_edges:
                 break
@@ -75,7 +72,6 @@ class MultiroomGraph:
             if not player_state:
                 return
             selected_source = player_state.attributes.get("source")
-            logger.debug("got %s", selected_source)
             players = [edge[0] for edge in in_edges if edge[2]["source"] == selected_source]
             if not players:
                 return
