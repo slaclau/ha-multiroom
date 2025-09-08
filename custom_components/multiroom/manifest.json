@@ -1,0 +1,13 @@
+{
+  "domain": "multiroom",
+  "name": "Multiroom AV",
+  "codeowners": ["@slaclau"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/slaclau/ha-multiroom",
+  "homekit": {},
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": [],
+  "version": 1
+}
