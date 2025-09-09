@@ -23,17 +23,3 @@ async def async_setup_entry(
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up entry sensors."""
-    async_add_entities(Source(config))
-
-
-class Source(SensorEntity):
-    """Current source."""
-
-    _attr_supported_features = (
-        MediaPlayerEntityFeature.TURN_OFF | MediaPlayerEntityFeature.SELECT_SOURCE
-    )
-    _attr_has_entity_name = True
-    _attr_name = "Source"
-    _attr_entity_category = 
-
-    
