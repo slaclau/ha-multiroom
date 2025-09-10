@@ -55,6 +55,7 @@ class RoomPlayer(MediaPlayerEntity):
     _attr_name = None
     _attr_should_poll = False
     source_map = {}
+    sound_map = {}
     desired_source = None
 
     def __init__(self, config, audio_only=False):
@@ -194,7 +195,11 @@ class RoomPlayer(MediaPlayerEntity):
     def sound_mode_list(self):
         states = [self.hass.states.get(player) for player in self.audio_players]
         states = [state for state in states if state]
-        return [state.attributes.get("friendly_name") for state in states]
+        self.sound_map = {
+            state.attributes.get("friendly_name"): state.entity_id for state in states
+        }
+        rtn = list(self.sound_map.keys())
+        return rtn
 
     @property
     def volume_level(self):
@@ -264,6 +269,9 @@ class RoomPlayer(MediaPlayerEntity):
         self.async_schedule_update_ha_state()
         self.desired_source = None
         self.async_schedule_update_ha_state()
+
+    async def async_select_sound_mode(self, sound_mode):
+        self.selected_audio_player = 
 
     async def async_media_play(self):
         await self.hass.services.async_call(
