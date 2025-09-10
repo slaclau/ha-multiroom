@@ -192,6 +192,10 @@ class RoomPlayer(MediaPlayerEntity):
         return rtn
 
     @property
+    def sound_mode(self):
+        return self.sound_map[self.selected_audio_player]
+
+    @property
     def sound_mode_list(self):
         states = [self.hass.states.get(player) for player in self.audio_players]
         states = [state for state in states if state]
@@ -271,7 +275,7 @@ class RoomPlayer(MediaPlayerEntity):
         self.async_schedule_update_ha_state()
 
     async def async_select_sound_mode(self, sound_mode):
-        self.selected_audio_player = 
+        self.selected_audio_player = self.sound_map[sound_mode]
 
     async def async_media_play(self):
         await self.hass.services.async_call(
