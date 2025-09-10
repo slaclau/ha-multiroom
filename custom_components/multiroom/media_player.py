@@ -194,17 +194,15 @@ class RoomPlayer(MediaPlayerEntity):
     @property
     def sound_mode(self):
         if len(self.audio_players) > 1:
-            return self.sound_map[self.selected_audio_player]
+            state = self.hass.states.get(self.selected_audio_player)
+            if state:
+                return state.attributes.get("friendly_name")
 
     @property
     def sound_mode_list(self):
         states = [self.hass.states.get(player) for player in self.audio_players]
         states = [state for state in states if state]
-        self.sound_map = {
-            state.attributes.get("friendly_name"): state.entity_id for state in states
-        }
-        rtn = list(self.sound_map.keys())
-        return rtn
+        return [state.attributes.get("friendly_name") for state in states]
 
     @property
     def volume_level(self):
