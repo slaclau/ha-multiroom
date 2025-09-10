@@ -67,7 +67,7 @@ class MultiroomConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 vol.Optional("video"): selector.EntitySelector(
                     selector.EntitySelectorConfig(
                         domain=[MEDIA_PLAYER_DOMAIN],
-                        multiple=False,
+                        multiple=True,
                     )
                 ),
             }
