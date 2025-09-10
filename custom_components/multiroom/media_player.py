@@ -193,7 +193,8 @@ class RoomPlayer(MediaPlayerEntity):
 
     @property
     def sound_mode(self):
-        return self.sound_map[self.selected_audio_player]
+        if len(self.audio_players) > 1:
+            return self.sound_map[self.selected_audio_player]
 
     @property
     def sound_mode_list(self):
